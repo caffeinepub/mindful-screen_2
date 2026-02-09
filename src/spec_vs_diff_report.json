@@ -1,0 +1,93 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-03T14:59:55.369Z",
+  "summary": "Diff adds a TanStack Router-based app shell with navigation, Internet Identity login/logout UI, an in-app visible-tab timer that records sessions to the backend, mindful break suggestions, multiple games (Tic Tac Toe, sliding puzzle, riddles, math), notes UI components (list/editor/delete confirm), and global audio controls with persisted preferences. Backend adds per-user time limits, session recording, notes/user profile storage with access control checks; however stable persistence and required static assets usage are not fully evidenced.",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Backend stores and returns per-user settings and time-tracking state with persistence across reloads.",
+      "reason": "Backend data structures for time limits and session records are shown as non-stable in the provided snippet (e.g., `let userTimeLimits = Map.empty...`), so persistence via stable canister state is not evidenced in the diff summary.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "requirement": "Notes must persist per user and backend must store notes in stable canister state.",
+      "reason": "Notes storage is shown as an in-memory map (`let userNotes = Map.empty...`) and stable storage for notes is not evidenced in the truncated backend snippet.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "requirement": "Commit generated static visual assets under `frontend/public/assets/generated` and render them in the UI (logo in header and background illustration on key screens).",
+      "reason": "UI references the logo path, but the diff summary does not show the generated assets being added under `frontend/public/assets/generated`, nor any usage of the required background illustration asset.",
+      "evidence": [
+        "frontend/src/components/layout/AppShell.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "User profile creation/setup flow (name-based profile) with backend profile APIs and a mandatory profile setup dialog.",
+      "reason": "BuildRequest requirements focus on timer, suggestions, games, notes, settings, audio, and Internet Identity authentication; a user profile feature is not requested.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/components/auth/ProfileSetupDialog.tsx"
+      ]
+    },
+    {
+      "description": "Custom access control initialization via a secret URL parameter (`caffeineAdminToken`) and `_initializeAccessControlWithSecret` call when creating the actor.",
+      "reason": "BuildRequest only requires Internet Identity authentication gating for user data; secret-token-based admin/access-control bootstrapping is not requested.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts",
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "confidence": 0.66,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/auth/AuthGate.tsx",
+    "frontend/src/components/auth/LoginButton.tsx",
+    "frontend/src/components/auth/ProfileSetupDialog.tsx",
+    "frontend/src/components/dashboard/MindfulSuggestionCard.tsx",
+    "frontend/src/components/layout/AppShell.tsx",
+    "frontend/src/features/games/GamesLanding.tsx",
+    "frontend/src/features/games/math/MathGame.tsx",
+    "frontend/src/features/games/puzzle/SlidingPuzzleGame.tsx",
+    "frontend/src/features/games/riddles/RiddlesGame.tsx",
+    "frontend/src/features/games/tictactoe/TicTacToeGame.tsx",
+    "frontend/src/features/notes/DeleteNoteConfirmDialog.tsx",
+    "frontend/src/features/notes/NoteEditor.tsx",
+    "frontend/src/features/notes/NotesList.tsx",
+    "frontend/src/features/suggestions/suggestions.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useAudioPreferences.ts",
+    "frontend/src/hooks/useDailyTimeLimit.ts",
+    "frontend/src/hooks/useInAppTimer.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useNotes.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useUserProfile.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/audio/ambientAudio.ts",
+    "frontend/src/lib/time.ts",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/DashboardPage.tsx",
+    "frontend/src/pages/GamesPage.tsx",
+    "frontend/src/pages/NotesPage.tsx",
+    "frontend/src/pages/SettingsPage.tsx",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-03T14:59:55.408Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 9,
+    "implemented": 9,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Create the Mindful Screen app shell with navigation for: Dashboard (timer + suggestions), Games, Notes, and Settings.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/layout/AppShell.tsx",
+          "frontend/src/pages/DashboardPage.tsx",
+          "frontend/src/pages/GamesPage.tsx",
+          "frontend/src/pages/NotesPage.tsx",
+          "frontend/src/pages/SettingsPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/layout/AppShell.tsx",
+          "frontend/src/pages/DashboardPage.tsx",
+          "frontend/src/pages/GamesPage.tsx",
+          "frontend/src/pages/NotesPage.tsx",
+          "frontend/src/pages/SettingsPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Implement a mindful screen-time tracker for in-app usage time (time spent actively using the Mindful Screen web app) with a user-configurable daily time limit and session tracking.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useInAppTimer.ts",
+          "frontend/src/hooks/useDailyTimeLimit.ts",
+          "frontend/src/pages/DashboardPage.tsx",
+          "frontend/src/pages/SettingsPage.tsx",
+          "frontend/src/lib/time.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useInAppTimer.ts",
+          "frontend/src/hooks/useDailyTimeLimit.ts",
+          "frontend/src/pages/DashboardPage.tsx",
+          "frontend/src/pages/SettingsPage.tsx",
+          "frontend/src/lib/time.ts"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "When the configured time limit is exceeded, show mindful break suggestions (e.g., “Talk with a friend”, “Read a book”) and provide a way to cycle to a new suggestion.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/features/suggestions/suggestions.ts",
+          "frontend/src/components/dashboard/MindfulSuggestionCard.tsx",
+          "frontend/src/pages/DashboardPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/features/suggestions/suggestions.ts",
+          "frontend/src/components/dashboard/MindfulSuggestionCard.tsx",
+          "frontend/src/pages/DashboardPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Add a Games section that includes at minimum: Tic Tac Toe, a simple puzzle game, a riddles mode, and a math problems mode.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/features/games/GamesLanding.tsx",
+          "frontend/src/features/games/tictactoe/TicTacToeGame.tsx",
+          "frontend/src/features/games/puzzle/SlidingPuzzleGame.tsx",
+          "frontend/src/features/games/riddles/RiddlesGame.tsx",
+          "frontend/src/features/games/math/MathGame.tsx",
+          "frontend/src/pages/GamesPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/features/games/GamesLanding.tsx",
+          "frontend/src/features/games/tictactoe/TicTacToeGame.tsx",
+          "frontend/src/features/games/puzzle/SlidingPuzzleGame.tsx",
+          "frontend/src/features/games/riddles/RiddlesGame.tsx",
+          "frontend/src/features/games/math/MathGame.tsx",
+          "frontend/src/pages/GamesPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Add peaceful, pleasant background music and optional soft sound effects with user controls (play/pause, volume, and mute) and persistence of audio preferences.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useAudioPreferences.ts",
+          "frontend/src/lib/audio/ambientAudio.ts",
+          "frontend/src/components/audio/AudioControls.tsx",
+          "frontend/src/components/layout/AppShell.tsx",
+          "frontend/src/pages/SettingsPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useAudioPreferences.ts",
+          "frontend/src/lib/audio/ambientAudio.ts",
+          "frontend/src/components/layout/AppShell.tsx",
+          "frontend/src/pages/SettingsPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Implement a Notes feature where the user can create, view, edit, and delete notes to store thoughts or day-to-day activities; notes must persist per user.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useNotes.ts",
+          "frontend/src/features/notes/NotesList.tsx",
+          "frontend/src/features/notes/NoteEditor.tsx",
+          "frontend/src/features/notes/DeleteNoteConfirmDialog.tsx",
+          "frontend/src/pages/NotesPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useNotes.ts",
+          "frontend/src/features/notes/NotesList.tsx",
+          "frontend/src/features/notes/NoteEditor.tsx",
+          "frontend/src/features/notes/DeleteNoteConfirmDialog.tsx",
+          "frontend/src/pages/NotesPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Add Internet Identity sign-in and require authentication for saving/retrieving user data (time-limit settings and notes).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/auth/LoginButton.tsx",
+          "frontend/src/hooks/useUserProfile.ts",
+          "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "frontend/src/components/auth/AuthGate.tsx",
+          "frontend/src/components/layout/AppShell.tsx",
+          "frontend/src/pages/SettingsPage.tsx",
+          "frontend/src/pages/NotesPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/auth/LoginButton.tsx",
+          "frontend/src/hooks/useUserProfile.ts",
+          "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "frontend/src/components/auth/AuthGate.tsx",
+          "frontend/src/components/layout/AppShell.tsx",
+          "frontend/src/pages/SettingsPage.tsx",
+          "frontend/src/pages/NotesPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-8",
+        "summary": "Apply a coherent, calming visual theme across the app (colors, typography, spacing, and components) optimized for low distraction.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/layout/AppShell.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js",
+          "frontend/src/components/layout/AppShell.tsx"
+        ]
+      },
+      {
+        "id": "REQ-9",
+        "summary": "Add generated static visual assets for branding and ambiance and render them in the UI (stored in frontend/public/assets/generated).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/generated/mindful-screen-logo.dim_512x512.png",
+          "frontend/public/assets/generated/mindful-background.dim_1920x1080.png",
+          "frontend/public/assets/generated/mindful-icons-set.dim_512x512.png",
+          "frontend/src/components/layout/AppShell.tsx",
+          "frontend/src/pages/DashboardPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/public/assets/generated/mindful-screen-logo.dim_512x512.png",
+          "frontend/public/assets/generated/mindful-background.dim_1920x1080.png",
+          "frontend/public/assets/generated/mindful-icons-set.dim_512x512.png",
+          "frontend/src/components/layout/AppShell.tsx",
+          "frontend/src/pages/DashboardPage.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/authorization/MixinAuthorization.mo",
+    "backend/authorization/access-control.mo",
+    "backend/main.mo",
+    "build-request.json",
+    "build-template/Dockerfile",
+    "build-template/LICENSE",
+    "build-template/README.md",
+    "build-template/deploy.sh",
+    "build-template/icp.yaml",
+    "build-template/package.json",
+    "build-template/pnpm-lock.yaml",
+    "build-template/pnpm-workspace.yaml",
+    "build-template/scripts/prune-unused-images.js",
+    "build-template/scripts/resize-images.js",
+    "build-template/src/backend/canister.yaml",
+    "build-template/src/backend/system-idl/aaaaa-aa.did",
+    "build-template/src/frontend/canister.yaml",
+    "build-template/src/frontend/components.json",
+    "build-template/src/frontend/env.json",
+    "build-template/src/frontend/eslint-rules/no-bigint-in-query-keys.js",
+    "build-template/src/frontend/eslint-rules/require-internet-identity-provider.js",
+    "build-template/src/frontend/eslint.config.js",
+    "build-template/src/frontend/package.json",
+    "build-template/src/frontend/postcss.config.js",
+    "build-template/src/frontend/src/components/ui/accordion.tsx",
+    "build-template/src/frontend/src/components/ui/alert-dialog.tsx",
+    "build-template/src/frontend/src/components/ui/alert.tsx",
+    "build-template/src/frontend/src/components/ui/aspect-ratio.tsx",
+    "build-template/src/frontend/src/components/ui/avatar.tsx",
+    "build-template/src/frontend/src/components/ui/badge.tsx",
+    "build-template/src/frontend/src/components/ui/breadcrumb.tsx",
+    "build-template/src/frontend/src/components/ui/button.tsx",
+    "build-template/src/frontend/src/components/ui/calendar.tsx",
+    "build-template/src/frontend/src/components/ui/card.tsx",
+    "build-template/src/frontend/src/components/ui/carousel.tsx",
+    "build-template/src/frontend/src/components/ui/chart.tsx",
+    "build-template/src/frontend/src/components/ui/checkbox.tsx",
+    "build-template/src/frontend/src/components/ui/collapsible.tsx",
+    "build-template/src/frontend/src/components/ui/command.tsx",
+    "build-template/src/frontend/src/components/ui/context-menu.tsx",
+    "build-template/src/frontend/src/components/ui/dialog.tsx",
+    "build-template/src/frontend/src/components/ui/drawer.tsx",
+    "build-template/src/frontend/src/components/ui/dropdown-menu.tsx",
+    "build-template/src/frontend/src/components/ui/form.tsx",
+    "build-template/src/frontend/src/components/ui/hover-card.tsx",
+    "build-template/src/frontend/src/components/ui/input-otp.tsx",
+    "build-template/src/frontend/src/components/ui/input.tsx",
+    "build-template/src/frontend/src/components/ui/label.tsx",
+    "build-template/src/frontend/src/components/ui/menubar.tsx",
+    "build-template/src/frontend/src/components/ui/navigation-menu.tsx",
+    "build-template/src/frontend/src/components/ui/pagination.tsx",
+    "build-template/src/frontend/src/components/ui/popover.tsx",
+    "build-template/src/frontend/src/components/ui/progress.tsx",
+    "build-template/src/frontend/src/components/ui/radio-group.tsx",
+    "build-template/src/frontend/src/components/ui/resizable.tsx",
+    "build-template/src/frontend/src/components/ui/scroll-area.tsx",
+    "build-template/src/frontend/src/components/ui/select.tsx",
+    "build-template/src/frontend/src/components/ui/separator.tsx",
+    "build-template/src/frontend/src/components/ui/sheet.tsx",
+    "build-template/src/frontend/src/components/ui/sidebar.tsx",
+    "build-template/src/frontend/src/components/ui/skeleton.tsx",
+    "build-template/src/frontend/src/components/ui/slider.tsx",
+    "build-template/src/frontend/src/components/ui/sonner.tsx",
+    "build-template/src/frontend/src/components/ui/switch.tsx",
+    "build-template/src/frontend/src/components/ui/table.tsx",
+    "build-template/src/frontend/src/components/ui/tabs.tsx",
+    "build-template/src/frontend/src/components/ui/textarea.tsx",
+    "build-template/src/frontend/src/components/ui/toggle-group.tsx",
+    "build-template/src/frontend/src/components/ui/toggle.tsx",
+    "build-template/src/frontend/src/components/ui/tooltip.tsx",
+    "build-template/src/frontend/src/hooks/use-mobile.tsx",
+    "build-template/src/frontend/src/lib/utils.ts",
+    "build-template/src/frontend/tsconfig.json",
+    "build-template/src/frontend/vite.config.js",
+    "build-template/tsconfig.json",
+    "caffeine.lock.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/public/assets/generated/mindful-background.dim_1920x1080.png",
+    "frontend/public/assets/generated/mindful-icons-set.dim_512x512.png",
+    "frontend/public/assets/generated/mindful-screen-logo.dim_512x512.png",
+    "frontend/src/App.tsx",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/components/auth/AuthGate.tsx",
+    "frontend/src/components/auth/LoginButton.tsx",
+    "frontend/src/components/auth/ProfileSetupDialog.tsx",
+    "frontend/src/components/dashboard/MindfulSuggestionCard.tsx",
+    "frontend/src/components/layout/AppShell.tsx",
+    "frontend/src/config.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/features/games/GamesLanding.tsx",
+    "frontend/src/features/games/math/MathGame.tsx",
+    "frontend/src/features/games/puzzle/SlidingPuzzleGame.tsx",
+    "frontend/src/features/games/riddles/RiddlesGame.tsx",
+    "frontend/src/features/games/tictactoe/TicTacToeGame.tsx",
+    "frontend/src/features/notes/DeleteNoteConfirmDialog.tsx",
+    "frontend/src/features/notes/NoteEditor.tsx",
+    "frontend/src/features/notes/NotesList.tsx",
+    "frontend/src/features/suggestions/suggestions.ts",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useAudioPreferences.ts",
+    "frontend/src/hooks/useDailyTimeLimit.ts",
+    "frontend/src/hooks/useInAppTimer.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useNotes.ts",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/hooks/useUserProfile.ts",
+    "frontend/src/index.css",
+    "frontend/src/lib/audio/ambientAudio.ts",
+    "frontend/src/lib/time.ts",
+    "frontend/src/lib/utils.ts",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/DashboardPage.tsx",
+    "frontend/src/pages/GamesPage.tsx",
+    "frontend/src/pages/NotesPage.tsx",
+    "frontend/src/pages/SettingsPage.tsx",
+    "frontend/src/ui-summary.json",
+    "frontend/src/utils/StorageClient.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

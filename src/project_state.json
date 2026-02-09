@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Build a mindful screen tracking app called Mindful Screen that monitors usage time, suggests healthy activities when limits are exceeded, includes calming background music, simple mini-games, and a notes feature for daily thoughts/activities.",
+  "existing_features": [
+    {
+      "id": "feature-create-the-mindful-screen-app-shell-with-navigation-for-dashboard-timer-suggestions-games-notes-and-settings",
+      "title": "Create the Mindful Screen app shell with navigation for: Dashboard (timer + suggestions), Games, Notes, and Settings.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-mindful-screen-time-tracker-for-in-app-usage-time-time-spent-actively-using-the-mindful-screen-web-app-with-a-user-configurable-daily-time-limit-and-session-tracking",
+      "title": "Implement a mindful screen-time tracker for in-app usage time (time spent actively using the Mindful Screen web app) with a user-configurable daily time limit and session tracking.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-when-the-configured-time-limit-is-exceeded-show-mindful-break-suggestions-e-g-talk-with-a-friend-read-a-book-and-provide-a-way-to-cycle-to-a-new-suggestion",
+      "title": "When the configured time limit is exceeded, show mindful break suggestions (e.g., “Talk with a friend”, “Read a book”) and provide a way to cycle to a new suggestion.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-games-section-that-includes-at-minimum-tic-tac-toe-a-simple-puzzle-game-a-riddles-mode-and-a-math-problems-mode",
+      "title": "Add a Games section that includes at minimum: Tic Tac Toe, a simple puzzle game, a riddles mode, and a math problems mode.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-peaceful-pleasant-background-music-and-optional-soft-sound-effects-with-user-controls-play-pause-volume-and-mute-and-persistence-of-audio-preferences",
+      "title": "Add peaceful, pleasant background music and optional soft sound effects with user controls (play/pause, volume, and mute) and persistence of audio preferences.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-notes-feature-where-the-user-can-create-view-edit-and-delete-notes-to-store-thoughts-or-day-to-day-activities-notes-must-persist-per-user",
+      "title": "Implement a Notes feature where the user can create, view, edit, and delete notes to store thoughts or day-to-day activities; notes must persist per user.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-internet-identity-sign-in-and-require-authentication-for-saving-retrieving-user-data-time-limit-settings-and-notes",
+      "title": "Add Internet Identity sign-in and require authentication for saving/retrieving user data (time-limit settings and notes).",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-calming-visual-theme-across-the-app-colors-typography-spacing-and-components-optimized-for-low-distraction",
+      "title": "Apply a coherent, calming visual theme across the app (colors, typography, spacing, and components) optimized for low distraction.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-visual-assets-for-branding-and-ambiance-and-render-them-in-the-ui-stored-in-frontend-public-assets-generated",
+      "title": "Add generated static visual assets for branding and ambiance and render them in the UI (stored in frontend/public/assets/generated).",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Track screen/app usage time and detect when user-defined time limits are exceeded",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "When limits are exceeded, show mindful break suggestions (e.g., talk to a friend, read a book)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Include mini-games: tic tac toe, puzzles, riddles, math problems, etc.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Provide peaceful, pleasant background music and sounds to support mindful breaks",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add a notes option for storing thoughts and day-to-day activities",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "architecturalNotes": [],
+  "knownIssues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Minimal lotus + phone outline logo, calm earthy palette (mindful-screen-logo.dim_512x512.png)\n- Soft zen background illustration with warm beige/sage tones, subtle gradients, no characters (mindful-background.dim_1920x1080.png)\n- Set of 6 small line icons (note, timer, gamepad, music, puzzle, lightbulb) in consistent style (mindful-icons-set.dim_512x512.png)",
+  "generatedImages": [
+    {
+      "filename": "mindful-screen-logo.dim_512x512.png",
+      "description": "Minimal lotus + phone outline logo, calm earthy palette",
+      "targetWidth": 512,
+      "targetHeight": 512
+    },
+    {
+      "filename": "mindful-background.dim_1920x1080.png",
+      "description": "Soft zen background illustration with warm beige/sage tones, subtle gradients, no characters",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "mindful-icons-set.dim_512x512.png",
+      "description": "Set of 6 small line icons (note, timer, gamepad, music, puzzle, lightbulb) in consistent style",
+      "targetWidth": 512,
+      "targetHeight": 512
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Mindful Screen",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0,
+  "requiresBackendChanges": true,
+  "requiresFrontendChanges": true
+}

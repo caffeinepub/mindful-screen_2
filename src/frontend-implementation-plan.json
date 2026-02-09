@@ -1,0 +1,337 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Mindful Screen (frontend-only) — navigation, timer, suggestions, games, notes, audio, theme, assets",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create the Mindful Screen app shell with client-side navigation for Dashboard, Games, Notes, and Settings.",
+      "acceptanceCriteria": [
+        "App name shown as “Mindful Screen” in the UI header.",
+        "User can navigate between Dashboard, Games, Notes, and Settings without page reload issues.",
+        "Each section has a clear title and consistent layout."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the root app composition including the app shell layout, client-side navigation wiring to Dashboard/Games/Notes/Settings, and section title rendering. Use shadcn-ui components (e.g., navigation buttons, cards) to keep styling consistent; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "create",
+          "description": "Create a shared layout with a header showing “Mindful Screen”, primary navigation links, and a content container used by all sections. Use shadcn-ui components for header/nav UI; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "create",
+          "description": "Create the Dashboard page container with a clear page title and placeholders for timer, suggestions, and background illustration integration."
+        },
+        {
+          "path": "frontend/src/pages/GamesPage.tsx",
+          "operation": "create",
+          "description": "Create the Games page container with a clear title and an area for the games landing list and game launcher view."
+        },
+        {
+          "path": "frontend/src/pages/NotesPage.tsx",
+          "operation": "create",
+          "description": "Create the Notes page container with a clear title and an area for notes list and editor panels."
+        },
+        {
+          "path": "frontend/src/pages/SettingsPage.tsx",
+          "operation": "create",
+          "description": "Create the Settings page container with a clear title and sections for daily time limit and audio preferences."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement in-app usage timer with visibility-based tracking, daily limit display, and settings persistence via authenticated backend calls.",
+      "acceptanceCriteria": [
+        "Dashboard displays today’s in-app time (hh:mm:ss) and the configured daily limit.",
+        "Timer counts only while the app tab is visible (pauses when hidden) and continues when visible again.",
+        "User can set and save a daily time limit in Settings; the value persists across reloads.",
+        "Backend stores and returns per-user settings and time-tracking state."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useInAppTimer.ts",
+          "operation": "create",
+          "description": "Implement a hook to track in-app active time using document visibility (pause/resume) and session start/end boundaries, producing elapsed time for 'today' and exposing session lifecycle events for saving when authenticated."
+        },
+        {
+          "path": "frontend/src/hooks/useDailyTimeLimit.ts",
+          "operation": "create",
+          "description": "Implement a hook that loads and saves the daily time limit using the backend actor when authenticated (getDailyTimeLimit/setDailyTimeLimit), with UI-friendly loading/error states."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Wire timer output into the Dashboard UI: show today’s elapsed time (hh:mm:ss) and the configured daily limit, and ensure the timer only advances while the tab is visible."
+        },
+        {
+          "path": "frontend/src/pages/SettingsPage.tsx",
+          "operation": "modify",
+          "description": "Add a daily time limit setting UI (minutes) that saves via authenticated backend calls and reloads on app start. Use shadcn-ui form controls for inputs/buttons; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/lib/time.ts",
+          "operation": "create",
+          "description": "Add small time utilities (format hh:mm:ss, compute day start timestamp, safe bigint/date conversions) used by the timer and session record retrieval."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Show mindful break suggestions when the daily limit is exceeded and allow cycling to a new suggestion.",
+      "acceptanceCriteria": [
+        "When elapsed time >= limit, a prominent “Mindful suggestion” card/banner appears on the Dashboard.",
+        "At least 10 suggestions are available, including the examples given by the user.",
+        "A “New suggestion” control shows a different suggestion without reloading the page.",
+        "The UI clearly indicates the limit has been exceeded."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/suggestions/suggestions.ts",
+          "operation": "create",
+          "description": "Define a suggestions list (>= 10 items) including “Talk with a friend” and “Read a book”, and provide helpers to pick/rotate suggestions without repeating the current one."
+        },
+        {
+          "path": "frontend/src/components/dashboard/MindfulSuggestionCard.tsx",
+          "operation": "create",
+          "description": "Create a prominent suggestion card/banner component that renders the current suggestion, indicates the limit is exceeded, and includes a “New suggestion” control. Use shadcn-ui components for the card and button; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Show the MindfulSuggestionCard only when elapsed time >= configured limit, and wire up “New suggestion” cycling without page reload."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Add a Games section with Tic Tac Toe, a simple puzzle game, riddles mode, and math problems mode.",
+      "acceptanceCriteria": [
+        "Games landing page lists the available games and allows launching each one.",
+        "Tic Tac Toe: playable Human vs Human with win/draw detection and a reset button.",
+        "Puzzle: provide a playable simple puzzle (e.g., sliding tile or jigsaw-style grid) with a reset/shuffle action and completion detection.",
+        "Riddles: show a riddle prompt with “Show answer” and “Next riddle”.",
+        "Math: generate age-neutral arithmetic questions with input validation, score (correct/total), and “Next question”."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/games/GamesLanding.tsx",
+          "operation": "create",
+          "description": "Create the games landing list UI showing available modes (Tic Tac Toe, Puzzle, Riddles, Math) and allowing the user to launch a mode in-page. Use shadcn-ui components for the list/buttons; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/games/tictactoe/TicTacToeGame.tsx",
+          "operation": "create",
+          "description": "Implement Human vs Human Tic Tac Toe with win/draw detection and a reset button."
+        },
+        {
+          "path": "frontend/src/features/games/puzzle/SlidingPuzzleGame.tsx",
+          "operation": "create",
+          "description": "Implement a simple sliding-tile puzzle with shuffle/reset action and completion detection."
+        },
+        {
+          "path": "frontend/src/features/games/riddles/RiddlesGame.tsx",
+          "operation": "create",
+          "description": "Implement riddles mode with prompt, “Show answer”, and “Next riddle” cycling."
+        },
+        {
+          "path": "frontend/src/features/games/math/MathGame.tsx",
+          "operation": "create",
+          "description": "Implement math problems mode generating age-neutral arithmetic questions with input validation, score (correct/total), and “Next question”."
+        },
+        {
+          "path": "frontend/src/pages/GamesPage.tsx",
+          "operation": "modify",
+          "description": "Wire the games landing list and the four game components into the Games section with an in-page launcher (no page reload)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add calming background music and optional soft sound effects with play/pause, volume, mute, and persisted audio preferences.",
+      "acceptanceCriteria": [
+        "Audio controls are accessible (at least from Dashboard and/or a global header).",
+        "User can play/pause background music, adjust volume, and mute/unmute.",
+        "Audio settings persist across reloads.",
+        "Audio defaults are non-intrusive (start muted or require an explicit user action to start playback, to comply with browser autoplay policies)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useAudioPreferences.ts",
+          "operation": "create",
+          "description": "Create a hook that manages audio state (muted, volume, playing) and persists preferences to local storage, defaulting to muted/paused until explicit user interaction."
+        },
+        {
+          "path": "frontend/src/lib/audio/ambientAudio.ts",
+          "operation": "create",
+          "description": "Implement a lightweight ambient audio engine (e.g., WebAudio-based soft tones) suitable for calming background playback and optional soft UI sound effects."
+        },
+        {
+          "path": "frontend/src/components/audio/AudioControls.tsx",
+          "operation": "create",
+          "description": "Create audio controls UI (play/pause, volume, mute) suitable for a header placement. Use shadcn-ui components (buttons, slider) for consistent controls; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "modify",
+          "description": "Place AudioControls in the global header so it is accessible across sections, while ensuring playback starts only after user action."
+        },
+        {
+          "path": "frontend/src/pages/SettingsPage.tsx",
+          "operation": "modify",
+          "description": "Add an Audio preferences section that mirrors the global controls and clearly communicates the muted-by-default behavior."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement Notes CRUD UI (create/view/edit/delete) with per-user persistence gated by authentication.",
+      "acceptanceCriteria": [
+        "Notes list view shows note title (or first line) and last updated time.",
+        "User can create a new note, edit existing notes, and delete notes with a confirmation step.",
+        "Notes persist across reloads and are scoped to the signed-in user.",
+        "Backend provides CRUD methods for notes and stores them in stable canister state."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useNotes.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for loading and mutating notes via the backend actor (getAllNotesSortedByTimestamp, createNote, updateNote, deleteNote), with cache invalidation on changes and graceful handling of authorization errors."
+        },
+        {
+          "path": "frontend/src/features/notes/NotesList.tsx",
+          "operation": "create",
+          "description": "Create a notes list component displaying note title (or first line) and last updated time, with selection and delete actions. Use shadcn-ui components for list items, buttons, and dialogs; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/notes/NoteEditor.tsx",
+          "operation": "create",
+          "description": "Create an editor panel for creating and editing notes (title + content) with save/cancel UX. Use shadcn-ui inputs/textarea/buttons; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/features/notes/DeleteNoteConfirmDialog.tsx",
+          "operation": "create",
+          "description": "Add a confirmation dialog component for deleting notes. Use shadcn-ui dialog components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/NotesPage.tsx",
+          "operation": "modify",
+          "description": "Wire the NotesList and NoteEditor into the Notes page, including create flow, edit flow, and delete with confirmation, while enforcing authentication for persistence."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Add Internet Identity sign-in UX and require authentication for saving/retrieving user data (daily limit settings and notes), including first-time profile setup.",
+      "acceptanceCriteria": [
+        "Unauthenticated users can see the app shell but are prompted to sign in to save settings/notes.",
+        "After signing in, the app loads the user’s saved settings and notes.",
+        "Signing out returns the UI to an unauthenticated state and prevents accessing prior user data."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/auth/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create a login/logout button using the existing useInternetIdentity hook and clear React Query caches on logout. This supports the selected authorization component’s frontend guidance; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useUserProfile.ts",
+          "operation": "create",
+          "description": "Create hooks to load/save the caller user profile (getCallerUserProfile/saveCallerUserProfile) and expose a 'needsProfileSetup' boolean to avoid modal flash, following the selected authorization component guidance; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/ProfileSetupDialog.tsx",
+          "operation": "create",
+          "description": "Create a first-login profile setup dialog prompting for the user’s name and saving it via backend calls. Use shadcn-ui dialog/form components; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/auth/AuthGate.tsx",
+          "operation": "create",
+          "description": "Create a simple wrapper component to show a sign-in prompt for data-saving actions (notes/settings) while still allowing public browsing of shell/pages when unauthenticated. Use shadcn-ui components for messaging/buttons; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "modify",
+          "description": "Add LoginButton to the header and wire ProfileSetupDialog to appear after login when no profile exists. This supports the selected authorization component’s profile setup UX; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/SettingsPage.tsx",
+          "operation": "modify",
+          "description": "Wrap persistence-related settings UI (daily time limit) with AuthGate messaging when unauthenticated, so unauthenticated users can see the page but are prompted to sign in to save."
+        },
+        {
+          "path": "frontend/src/pages/NotesPage.tsx",
+          "operation": "modify",
+          "description": "Gate notes loading and CRUD interactions behind authentication using AuthGate, showing a clear prompt when unauthenticated."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Apply a coherent calming theme across the app optimized for low distraction.",
+      "acceptanceCriteria": [
+        "Theme is consistent across Dashboard, Games, Notes, and Settings.",
+        "Use a calming palette (avoid blue/purple), generous whitespace, and clear typographic hierarchy.",
+        "UI components (cards, buttons, inputs) have consistent styling and accessible contrast."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create global styles and CSS variables used by Tailwind/shadcn-ui for a calming earthy palette (no blue/purple), readable typography, generous spacing, and accessible contrast across the app."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extension (if needed) to support the calming design tokens (e.g., shadows/radius/typography defaults) while keeping consistent component styling across pages."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "modify",
+          "description": "Ensure consistent layout rhythm (whitespace, container widths, section headers) and apply shared UI patterns (cards/buttons/inputs) using shadcn-ui; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add generated branding/ambiance static assets and render them from frontend/public/assets/generated.",
+      "acceptanceCriteria": [
+        "Generated assets are committed under frontend/public/assets/generated.",
+        "App uses the logo in the header and the background illustration on key screens (e.g., Dashboard).",
+        "Assets load locally without backend image serving."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/mindful-screen-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated logo asset at the required path for local static loading."
+        },
+        {
+          "path": "frontend/public/assets/generated/mindful-background.dim_1920x1080.png",
+          "operation": "create",
+          "description": "Add the generated background illustration asset at the required path for local static loading."
+        },
+        {
+          "path": "frontend/public/assets/generated/mindful-icons-set.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated icons set asset at the required path for local static loading."
+        },
+        {
+          "path": "frontend/src/components/layout/AppShell.tsx",
+          "operation": "modify",
+          "description": "Render the logo from frontend/public/assets/generated/mindful-screen-logo.dim_512x512.png in the header (near the “Mindful Screen” title) and optionally use the icons set frontend/public/assets/generated/mindful-icons-set.dim_512x512.png for nav affordances."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "modify",
+          "description": "Render the background illustration from frontend/public/assets/generated/mindful-background.dim_1920x1080.png on the Dashboard in a subtle, low-distraction manner."
+        }
+      ]
+    }
+  ]
+}
